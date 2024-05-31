@@ -39,6 +39,10 @@ dependencies:
   go_router: ^14.1.4
   shared_preferences: ^2.2.3
   smooth_page_indicator: ^1.1.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -65,7 +69,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - asset/image/
-    - asset/text/
+    - asset/lang/en-US.json
+    - asset/lang/tr-TR.json
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

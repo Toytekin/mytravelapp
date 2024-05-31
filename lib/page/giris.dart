@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seyehatapp/constant/router/router.dart';
+import 'package:seyehatapp/generated/locale_keys.g.dart';
 import 'package:seyehatapp/services/cubit/theme_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class GirisEkrani extends StatefulWidget {
   const GirisEkrani({super.key});
@@ -53,7 +55,7 @@ class _GirisEkraniState extends State<GirisEkrani> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'hello',
+              LocaleKeys.giris_title.tr(),
               style: TextStyle(
                 color: Theme.of(context).appBarTheme.backgroundColor,
                 fontSize: 30,
@@ -72,6 +74,15 @@ class _GirisEkraniState extends State<GirisEkrani> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                IconButton(
+                    onPressed: () {
+                      context.setLocale(const Locale("en", "US"));
+                    },
+                    icon: Icon(
+                      Icons.ads_click,
+                      size: 57,
+                      color: Theme.of(context).appBarTheme.backgroundColor,
+                    )),
                 IconButton(
                     onPressed: () {
                       if (onboarding == false) {

@@ -54,6 +54,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
               onPressed: () async {
                 final prefs = await SharedPreferences.getInstance();
                 prefs.setBool('showHome', true);
+                // ignore: use_build_context_synchronously
                 GoRouter.of(context).go(AppRouterName.anasayfa.path);
               },
               style: TextButton.styleFrom(
