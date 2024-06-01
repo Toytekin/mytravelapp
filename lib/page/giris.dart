@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:seyehatapp/constant/router/router.dart';
 import 'package:seyehatapp/generated/locale_keys.g.dart';
 import 'package:seyehatapp/services/cubit/theme_cubit.dart';
@@ -62,10 +63,12 @@ class _GirisEkraniState extends State<GirisEkrani> {
           children: [
             Text(
               LocaleKeys.giris_title.tr(),
-              style: TextStyle(
-                color: Theme.of(context).appBarTheme.backgroundColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+              style: GoogleFonts.seymourOne(
+                textStyle: TextStyle(
+                  color: Theme.of(context).appBarTheme.backgroundColor,
+                  letterSpacing: .3,
+                  fontSize: 28,
+                ),
               ),
             ),
             LayoutBuilder(
@@ -80,24 +83,6 @@ class _GirisEkraniState extends State<GirisEkrani> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                // IconButton(
-                //     onPressed: () {
-                //       context.setLocale(const Locale("en", "US"));
-                //     },
-                //     icon: Icon(
-                //       Icons.ads_click,
-                //       size: 57,
-                //       color: Theme.of(context).appBarTheme.backgroundColor,
-                //     )),
-                // IconButton(
-                //     onPressed: () {
-                //       context.setLocale(const Locale("tr", "TR"));
-                //     },
-                //     icon: Icon(
-                //       Icons.ads_click,
-                //       size: 57,
-                //       color: Theme.of(context).appBarTheme.backgroundColor,
-                //     )),
                 IconButton(
                     onPressed: () {
                       if (onboarding == false) {

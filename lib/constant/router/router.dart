@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:seyehatapp/page/anasayafa/setting.dart';
 import 'package:seyehatapp/page/boarding/boarding.dart';
 import 'package:seyehatapp/page/anasayafa/anasayfa.dart';
 import 'package:seyehatapp/page/giris.dart';
@@ -7,7 +6,6 @@ import 'package:seyehatapp/page/giris.dart';
 enum AppRouterName {
   girisEkrani('/home', 'Home'),
   bordBar('/bord', 'Bord'),
-  setting('/setting', 'Setting'),
 
   anasayfa('/page2', 'Deneme');
 
@@ -36,10 +34,6 @@ class AppRouters {
       GoRoute(
         path: '/bord',
         builder: (context, state) => const BoardingScreen(),
-      ),
-      GoRoute(
-        path: '/setting',
-        builder: (context, state) => const SettingScreen(),
       ),
     ],
   );
