@@ -73,6 +73,8 @@ flutter:
     - asset/image/
     - asset/lang/en-US.json
     - asset/lang/tr-TR.json
+    - asset/json/
+
 
 
 
