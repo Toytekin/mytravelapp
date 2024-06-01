@@ -37,17 +37,23 @@ class _GirisEkraniState extends State<GirisEkrani> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        actions: [
-          BlocBuilder<ThemeCubit, bool>(
-            builder: (BuildContext context, bool state) {
-              return Switch(
-                value: state,
-                onChanged: (value) {
-                  context.read<ThemeCubit>().temaDegistir();
+        leading: BlocBuilder<LanguageCubit, bool>(
+          builder: (BuildContext context, bool state) {
+            return TextButton(
+                onPressed: () {
+                  context.read<LanguageCubit>().dilDegistir();
+
+                  if (state == true) {
+                    context.setLocale(const Locale("en", "US"));
+                  } else {
+                    context.setLocale(const Locale("tr", "TR"));
+                  }
                 },
-              );
-            },
-          ),
+                child: state ? const Text('TR') : const Text('ENG'));
+          },
+        ),
+        actions: [
+          temadegistirme(),
         ],
       ),
       body: Center(
@@ -74,15 +80,24 @@ class _GirisEkraniState extends State<GirisEkrani> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(
-                    onPressed: () {
-                      context.setLocale(const Locale("en", "US"));
-                    },
-                    icon: Icon(
-                      Icons.ads_click,
-                      size: 57,
-                      color: Theme.of(context).appBarTheme.backgroundColor,
-                    )),
+                // IconButton(
+                //     onPressed: () {
+                //       context.setLocale(const Locale("en", "US"));
+                //     },
+                //     icon: Icon(
+                //       Icons.ads_click,
+                //       size: 57,
+                //       color: Theme.of(context).appBarTheme.backgroundColor,
+                //     )),
+                // IconButton(
+                //     onPressed: () {
+                //       context.setLocale(const Locale("tr", "TR"));
+                //     },
+                //     icon: Icon(
+                //       Icons.ads_click,
+                //       size: 57,
+                //       color: Theme.of(context).appBarTheme.backgroundColor,
+                //     )),
                 IconButton(
                     onPressed: () {
                       if (onboarding == false) {
@@ -101,6 +116,26 @@ class _GirisEkraniState extends State<GirisEkrani> {
           ],
         ),
       ),
+    );
+  }
+
+  BlocBuilder<ThemeCubit, bool> temadegistirme() {
+    return BlocBuilder<ThemeCubit, bool>(
+      builder: (BuildContext context, bool state) {
+        return IconButton(
+            onPressed: () {
+              context.read<ThemeCubit>().temaDegistir();
+            },
+            icon: state
+                ? Icon(
+                    Icons.dark_mode,
+                    color: Theme.of(context).appBarTheme.backgroundColor,
+                  )
+                : Icon(
+                    Icons.light_mode,
+                    color: Theme.of(context).appBarTheme.backgroundColor,
+                  ));
+      },
     );
   }
 }

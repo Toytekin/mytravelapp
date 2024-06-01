@@ -1,7 +1,13 @@
 {
         "giris":{
-          "title":"Başlık",
+          "title":"MY TRAVEL APP",
           "body":"Gövde"
+        },
+        "bording":{
+          "st1":"Gezmek istediğin çok yer mi var?",
+          "st1a":"MYTRAVEL ile tüm seyahatlerini planla ve gitmek istediğin yerle ilgili avantajlı güzergahları öğren"
+           ,"st1b":"HADİ BAŞLAYALIM" 
+       
         }
   }
         

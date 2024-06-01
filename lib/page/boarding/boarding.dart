@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seyehatapp/constant/router/router.dart';
+import 'package:seyehatapp/page/boarding/state2.dart';
+import 'package:seyehatapp/page/boarding/state3.dart';
+import 'package:seyehatapp/page/boarding/statte1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -17,8 +20,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
 
   @override
   void dispose() {
-    super.dispose();
-
     controller.dispose();
     super.dispose();
   }
@@ -34,15 +35,9 @@ class _BoardingScreenState extends State<BoardingScreen> {
           },
           controller: controller,
           children: [
-            Container(
-              color: Colors.red,
-            ),
-            Container(
-              color: Colors.yellow,
-            ),
-            Container(
-              color: Colors.white,
-            ),
+            const State1(),
+            const State2(),
+            const State3(),
             Container(
               color: Colors.red,
             ),
@@ -52,10 +47,14 @@ class _BoardingScreenState extends State<BoardingScreen> {
       bottomSheet: isLastPage
           ? TextButton(
               onPressed: () async {
+                final currentContext =
+                    context; // context'i bir yerel değişkende saklayın.
                 final prefs = await SharedPreferences.getInstance();
-                prefs.setBool('showHome', true);
+                await prefs.setBool('showHome', true);
+
                 // ignore: use_build_context_synchronously
-                GoRouter.of(context).go(AppRouterName.anasayfa.path);
+                GoRouter.of(currentContext).go(
+                    AppRouterName.anasayfa.path); // Yerel değişkeni kullanın.
               },
               style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(

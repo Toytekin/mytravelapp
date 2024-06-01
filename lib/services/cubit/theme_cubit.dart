@@ -10,3 +10,13 @@ class ThemeCubit extends Cubit<bool> {
     emit(yeniDeger);
   }
 }
+
+class LanguageCubit extends Cubit<bool> {
+  LanguageCubit() : super(true);
+
+  dilDegistir() {
+    bool yeniDeger = !state;
+    debugPrint(yeniDeger.toString());
+    emit(yeniDeger);
+  }
+}
