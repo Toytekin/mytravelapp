@@ -7,6 +7,7 @@ import 'package:seyehatapp/services/havaservices.dart';
 import 'package:seyehatapp/services/model/havamodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seyehatapp/services/model/illermodel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AnaSayfa extends StatefulWidget {
   const AnaSayfa({super.key});
@@ -128,53 +129,11 @@ class _AnaSayfaState extends State<AnaSayfa> {
                   itemCount: allIller.length,
                   itemBuilder: (context, index) {
                     var item = allIller[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Container(
-                        decoration: decor(index),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width /
-                              2, // Adjust the width as per requirement
-                          child: Center(
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 10),
-                                Text(
-                                  LocaleKeys.anasayfa_meshur.tr(),
-                                  style: GoogleFonts.seymourOne(
-                                    textStyle: const TextStyle(
-                                      color: Color.fromARGB(58, 33, 149, 243),
-                                      letterSpacing: .4,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  item.meshurluk,
-                                  style: GoogleFonts.seymourOne(
-                                    textStyle: const TextStyle(
-                                      color: Colors.blue,
-                                      letterSpacing: .4,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                const Spacer(),
-                                Text(
-                                  item.il,
-                                  style: GoogleFonts.lato(
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        const Color.fromARGB(255, 16, 78, 128),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+                    return InkWell(
+                        onTap: () {
+                          searchInGoogleMaps(item.il);
+                        },
+                        child: kart(index, context, item));
                   },
                 ),
               ),
@@ -184,6 +143,69 @@ class _AnaSayfaState extends State<AnaSayfa> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void searchInGoogleMaps(String query) async {
+    String url = 'https://www.google.com/maps/search/?api=1&query=$query';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Padding kart(int index, BuildContext context, IllerModel item) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Container(
+        decoration: decor(index),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width /
+              2, // Adjust the width as per requirement
+          child: Center(
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Text(
+                  LocaleKeys.anasayfa_meshur.tr(),
+                  style: GoogleFonts.seymourOne(
+                    textStyle: const TextStyle(
+                      color: Color.fromARGB(58, 33, 149, 243),
+                      letterSpacing: .4,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                Text(
+                  item.meshurluk,
+                  style: GoogleFonts.seymourOne(
+                    textStyle: const TextStyle(
+                      color: Colors.blue,
+                      letterSpacing: .4,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                Icon(
+                  Icons.location_pin,
+                  color: Colors.blue,
+                  size: 25,
+                ),
+                Text(
+                  item.il,
+                  style: GoogleFonts.seymourOne(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(255, 16, 78, 128),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
