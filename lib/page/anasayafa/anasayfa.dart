@@ -1,8 +1,8 @@
 import 'dart:convert';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:seyehatapp/page/anasayafa/ilsecme.dart';
+import 'package:seyehatapp/generated/locale_keys.g.dart';
 import 'package:seyehatapp/services/havaservices.dart';
 import 'package:seyehatapp/services/model/havamodel.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,10 +17,7 @@ class AnaSayfa extends StatefulWidget {
 
 class _AnaSayfaState extends State<AnaSayfa> {
   HavaModel? havadurumu;
-  List<IllerModdel> allIller = [];
-  IllerModdel? secilenIl;
-
-  int resimGetir = 0;
+  List<IllerModel> allIller = [];
 
   @override
   void initState() {
@@ -42,18 +39,19 @@ class _AnaSayfaState extends State<AnaSayfa> {
 
   getData() async {
     try {
-      // debugPrint('Servis çalıştı');
-
       final String respons =
-          await rootBundle.loadString('asset/json/turkiye_illeri.json');
+          await rootBundle.loadString('asset/json/iller.json');
       final data = await jsonDecode(respons);
-      allIller = (data as List).map((e) => IllerModdel.fromJson(e)).toList();
-      secilenIl = allIller[0];
+      debugPrint("Veri");
+      debugPrint(data.toString());
+
+      // JSON dosyasını "iller" anahtarını kullanarak işleyin
+      allIller =
+          (data["iller"] as List).map((e) => IllerModel.fromJson(e)).toList();
       setState(() {});
     } catch (e) {
-      debugPrint('Iller sevices dosyası hatası');
+      debugPrint('Iller services dosyası hatası: $e');
     }
-    return allIller;
   }
 
   List<NetworkImage> resimler = [
@@ -85,6 +83,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              /// Hava durumu
               Expanded(
                 child: Container(
                   child: havadurumu != null
@@ -119,6 +118,9 @@ class _AnaSayfaState extends State<AnaSayfa> {
                         ),
                 ),
               ),
+              // İLLER
+              yazi(),
+
               Expanded(
                 flex: 2,
                 child: ListView.builder(
@@ -127,7 +129,7 @@ class _AnaSayfaState extends State<AnaSayfa> {
                   itemBuilder: (context, index) {
                     var item = allIller[index];
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Container(
                         decoration: decor(index),
                         child: SizedBox(
@@ -138,13 +140,35 @@ class _AnaSayfaState extends State<AnaSayfa> {
                               children: [
                                 const SizedBox(height: 10),
                                 Text(
-                                  item.ilAdi,
-                                  style: const TextStyle(fontSize: 22),
+                                  LocaleKeys.anasayfa_meshur.tr(),
+                                  style: GoogleFonts.seymourOne(
+                                    textStyle: const TextStyle(
+                                      color: Color.fromARGB(58, 33, 149, 243),
+                                      letterSpacing: .4,
+                                      fontSize: 18,
+                                    ),
+                                  ),
                                 ),
                                 Text(
-                                  "0${item.plaka}",
-                                  style: const TextStyle(fontSize: 22),
+                                  item.meshurluk,
+                                  style: GoogleFonts.seymourOne(
+                                    textStyle: const TextStyle(
+                                      color: Colors.blue,
+                                      letterSpacing: .4,
+                                      fontSize: 15,
+                                    ),
+                                  ),
                                 ),
+                                const Spacer(),
+                                Text(
+                                  item.il,
+                                  style: GoogleFonts.lato(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        const Color.fromARGB(255, 16, 78, 128),
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -166,8 +190,28 @@ class _AnaSayfaState extends State<AnaSayfa> {
     );
   }
 
+  Padding yazi() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Text(
+            LocaleKeys.anasayfa_iller.tr(),
+            style: GoogleFonts.seymourOne(
+              textStyle: TextStyle(
+                  color: Theme.of(context).appBarTheme.backgroundColor),
+              letterSpacing: .3,
+              fontSize: 15,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   BoxDecoration decor(int index) {
     return BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
       image: DecorationImage(
         fit: BoxFit.cover,
         opacity: 0.3,
