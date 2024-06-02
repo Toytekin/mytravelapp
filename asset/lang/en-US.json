@@ -1,7 +1,26 @@
 {
-      "giris":{
-        "title":"MY TRAVEL APP",
-        "body":"BODY"
-      }
+  "giris": {
+    "title": "MY TRAVEL APP",
+    "body": "Body"
+  },
+  "bording": {
+    "st1": "Do you have too many places to visit?",
+    "st1a": "Plan all your travels with MYTRAVEL and discover advantageous routes for the places you want to go",
+    "st1b": "LET'S GET STARTED"
+  },
+  "anasayfa": {
+    "iller": "Provinces",
+    "meshur": "TRY THIS",
+    "notlar": "My Memories"
+  },
+  "not": {
+    "nottut": "New Note",
+    "baslik": "Title",
+    "ani": "Memory",
+    "kaydet": "Save",
+    "dylogbaslik": "Warning",
+    "dylogyazi": "Do you want your memory to be permanently deleted?",
+    "sil": "Delete",
+    "vazgec": "Cancel"
+  }
 }
-      

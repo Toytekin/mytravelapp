@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +20,40 @@ class _AnaSayfaState extends State<AnaSayfa> with AnasayfaModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: profilModel != null
+            ? Text(
+                profilModel!.name,
+                style: TextStyle(fontSize: 22, color: Colors.orange),
+              )
+            : null,
+        actions: [
+          profilModel != null
+              ? InkWell(
+                  onTap: () {
+                    context.go(AppRouterName.setting.path);
+                  },
+                  child: ClipOval(
+                    child: Image.file(
+                      File(profilModel!.photoURL.toString()),
+                      fit: BoxFit.cover,
+                      width: 50, // Resmin genişliği
+                      height: 50, // Resmin yüksekliği
+                    ),
+                  ),
+                )
+              : IconButton(
+                  onPressed: () {
+                    context.go(AppRouterName.setting.path);
+                  },
+                  icon: Icon(
+                    Icons.settings,
+                    color: Theme.of(context).appBarTheme.backgroundColor,
+                  ),
+                ),
+        ],
+      ),
       body: Center(
         child: SafeArea(
           child: Column(

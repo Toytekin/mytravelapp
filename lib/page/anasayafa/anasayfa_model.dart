@@ -4,12 +4,18 @@ import 'package:seyehatapp/page/anasayafa/anasayfa.dart';
 import 'package:seyehatapp/services/havaservices.dart';
 import 'package:seyehatapp/services/model/havamodel.dart';
 import 'package:seyehatapp/services/model/illermodel.dart';
+import 'package:seyehatapp/services/model/profilmodel.dart';
+import 'package:seyehatapp/services/profil_services.dart';
 import 'dart:convert';
 
 import 'package:url_launcher/url_launcher.dart';
 
 mixin AnasayfaModel on State<AnaSayfa> {
 //DEĞİŞKENLER
+
+  var repo = ProfilServices();
+
+  ProfilModel? profilModel;
 
   HavaModel? havadurumu;
   List<IllerModel> allIller = [];
@@ -40,6 +46,17 @@ mixin AnasayfaModel on State<AnaSayfa> {
     super.initState();
     havadurumunuAl();
     getData();
+    veriGetir();
+  }
+
+  Future<void> veriGetir() async {
+    var data = await repo.getProfil();
+
+    if (data != null) {
+      setState(() {
+        profilModel = data;
+      });
+    }
   }
 
   //7 METOTLAR

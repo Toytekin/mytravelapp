@@ -4,12 +4,15 @@ import 'package:seyehatapp/page/anasayafa/anasayfa.dart';
 import 'package:seyehatapp/page/giris.dart';
 import 'package:seyehatapp/page/not/not_olustur.dart';
 import 'package:seyehatapp/page/not/nt_giris.dart';
+import 'package:seyehatapp/page/profil/profil_view.dart';
 
 enum AppRouterName {
   girisEkrani('/home', 'Home'),
   bordBar('/bord', 'Bord'),
   notGiris('/notgiris', 'NotGiris'),
   notOlustur('/otolustur', 'NotOlustur'),
+  setting('/setting', 'Setting'),
+
   anasayfa('/page2', 'Deneme');
 
   const AppRouterName(this.path, this.name);
@@ -45,6 +48,10 @@ class AppRouters {
       GoRoute(
         path: '/otolustur',
         builder: (context, state) => const NotOlusturScreen(),
+      ),
+      GoRoute(
+        path: '/setting',
+        builder: (context, state) => const ProfilView(),
       ),
     ],
   );

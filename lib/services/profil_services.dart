@@ -10,10 +10,7 @@ class ProfilServices {
 
   Future<ProfilModel?> getProfil() async {
     if (db.isEmpty) {
-      ProfilModel boskisi = ProfilModel(
-        name: 'Kullanıcı adı olustur',
-      );
-      return boskisi;
+      return null;
     } else {
       ProfilModel? kisi = await db.get('1');
       return kisi;
