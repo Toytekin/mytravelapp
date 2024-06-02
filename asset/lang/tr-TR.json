@@ -12,8 +12,23 @@
 
         "anasayfa":{
           "iller":"İller",
-          "meshur":"BUNU DENE"
-           ,"st1b":"HADİ BAŞLAYALIM" 
+          "meshur":"BUNU DENE",
+           "notlar":"Anılarım" 
+       
+        },
+        "not":{
+          "nottut":"Yeni Not",
+          "baslik":"Başlık",
+          "ani":"Anı" ,
+          "kaydet":"Kaydet",
+          "dylogbaslik":"Uyarı",
+          "dylogyazi":"Anınız kalıcı olarak silinsin mi ?",
+          "sil":"Sil",
+          "vazgec":"Vazgeç"
+
+
+
+
        
         }
   }

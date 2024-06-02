@@ -2,11 +2,14 @@ import 'package:go_router/go_router.dart';
 import 'package:seyehatapp/page/boarding/boarding.dart';
 import 'package:seyehatapp/page/anasayafa/anasayfa.dart';
 import 'package:seyehatapp/page/giris.dart';
+import 'package:seyehatapp/page/not/not_olustur.dart';
+import 'package:seyehatapp/page/not/nt_giris.dart';
 
 enum AppRouterName {
   girisEkrani('/home', 'Home'),
   bordBar('/bord', 'Bord'),
-
+  notGiris('/notgiris', 'NotGiris'),
+  notOlustur('/otolustur', 'NotOlustur'),
   anasayfa('/page2', 'Deneme');
 
   const AppRouterName(this.path, this.name);
@@ -34,6 +37,14 @@ class AppRouters {
       GoRoute(
         path: '/bord',
         builder: (context, state) => const BoardingScreen(),
+      ),
+      GoRoute(
+        path: '/notgiris',
+        builder: (context, state) => const NotGirisScreen(),
+      ),
+      GoRoute(
+        path: '/otolustur',
+        builder: (context, state) => const NotOlusturScreen(),
       ),
     ],
   );
