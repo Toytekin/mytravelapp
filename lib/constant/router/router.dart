@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seyehatapp/page/boarding/boarding.dart';
 import 'package:seyehatapp/page/anasayafa/anasayfa.dart';
@@ -5,6 +6,7 @@ import 'package:seyehatapp/page/giris.dart';
 import 'package:seyehatapp/page/not/not_olustur.dart';
 import 'package:seyehatapp/page/not/nt_giris.dart';
 import 'package:seyehatapp/page/profil/profil_view.dart';
+import 'package:seyehatapp/page/splash/splash.dart';
 
 enum AppRouterName {
   girisEkrani('/home', 'Home'),
@@ -12,6 +14,7 @@ enum AppRouterName {
   notGiris('/notgiris', 'NotGiris'),
   notOlustur('/otolustur', 'NotOlustur'),
   setting('/setting', 'Setting'),
+  splash('/splash', 'splash'),
 
   anasayfa('/page2', 'Deneme');
 
@@ -52,6 +55,13 @@ class AppRouters {
       GoRoute(
         path: '/setting',
         builder: (context, state) => const ProfilView(),
+      ),
+      GoRoute(
+        path: '/splash',
+        builder: (context, state) {
+          final nextPage = state.extra as Widget?;
+          return SplashScreen(nextPage: nextPage!);
+        },
       ),
     ],
   );

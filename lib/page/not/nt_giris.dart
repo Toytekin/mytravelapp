@@ -42,90 +42,93 @@ class _NotGirisScreenState extends State<NotGirisScreen> {
                 itemBuilder: (context, index) {
                   var item = state[index];
 
-                  return Card(
-                      child: Column(
-                    children: [
-                      aniTitleYazi(item, context),
-                      const SizedBox(height: 20),
-                      Text(
-                        item.ani,
-                      ),
-                      const SizedBox(height: 20),
-                      const SizedBox(height: 20),
-                      if (item.imgURL != null) // Resim yolu varsa
-                        Opacity(
-                          opacity: 0.4,
-                          child: Image.file(
-                            File(item.imgURL.toString()),
-                            fit: BoxFit.cover,
-                            height: 100,
-                            width: 100,
-                          ),
+                  return Container(
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      image: item.imgURL != null // Resim yolu varsa
+                          ? DecorationImage(
+                              image: FileImage(File(item.imgURL.toString())),
+                              fit: BoxFit.cover,
+                              opacity: 0.3)
+                          : null, // Resim yoksa arka planı null olarak bırakın
+                    ),
+                    child: Column(
+                      children: [
+                        aniTitleYazi(item, context),
+                        const SizedBox(height: 20),
+                        Text(
+                          item.ani,
                         ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title:
-                                        Text(LocaleKeys.not_dylogbaslik.tr()),
-                                    content:
-                                        Text(LocaleKeys.not_dylogyazi.tr()),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () async {
-                                          // Sil butonuna tıklandığında yapılacak işlemler
-                                          Navigator.of(context).pop();
-                                          // Silme işlemi gerçekleştirilebilir
-                                          await context
-                                              .read<NotlarCubit>()
-                                              .sil(item.notID);
-
-                                          context
-                                              .go(AppRouterName.anasayfa.path);
-                                        },
-                                        child: Text(LocaleKeys.not_sil.tr()),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Vazgeç butonuna tıklandığında yapılacak işlemler
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(LocaleKeys.not_vazgec.tr()),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            icon: Icon(
-                              Icons.delete,
-                              size: 30,
-                              color:
-                                  Theme.of(context).appBarTheme.backgroundColor,
-                            ),
-                          ),
-                          RatingBar.builder(
-                            onRatingUpdate: (_) {}, // Boş fonksiyon
-                            initialRating: item.score,
-                            minRating: 1,
-                            direction: Axis.horizontal,
-                            allowHalfRating: true,
-                            ignoreGestures: true,
-                            itemCount: 5,
-                            itemBuilder: (context, _) => Icon(Icons.favorite,
+                        const SizedBox(height: 20),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title:
+                                          Text(LocaleKeys.not_dylogbaslik.tr()),
+                                      content:
+                                          Text(LocaleKeys.not_dylogyazi.tr()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () async {
+                                            // Sil butonuna tıklandığında yapılacak işlemler
+                                            Navigator.of(context).pop();
+                                            // Silme işlemi gerçekleştirilebilir
+                                            await context
+                                                .read<NotlarCubit>()
+                                                .sil(item.notID);
+                                            context.go(
+                                                AppRouterName.anasayfa.path);
+                                          },
+                                          child: Text(LocaleKeys.not_sil.tr()),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            // Vazgeç butonuna tıklandığında yapılacak işlemler
+                                            Navigator.of(context).pop();
+                                          },
+                                          child:
+                                              Text(LocaleKeys.not_vazgec.tr()),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                size: 30,
                                 color: Theme.of(context)
                                     .appBarTheme
-                                    .backgroundColor),
-                          )
-                        ],
-                      )
-                    ],
-                  ));
+                                    .backgroundColor,
+                              ),
+                            ),
+                            RatingBar.builder(
+                              onRatingUpdate: (_) {}, // Boş fonksiyon
+                              initialRating: item.score,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              ignoreGestures: true,
+                              itemCount: 5,
+                              itemBuilder: (context, _) => Icon(Icons.favorite,
+                                  color: Theme.of(context)
+                                      .appBarTheme
+                                      .backgroundColor),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
                 },
               );
             }

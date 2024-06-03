@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:seyehatapp/constant/router/router.dart';
+import 'package:seyehatapp/generated/locale_keys.g.dart';
 import 'package:seyehatapp/page/boarding/state2.dart';
 import 'package:seyehatapp/page/boarding/state3.dart';
 import 'package:seyehatapp/page/boarding/statte1.dart';
@@ -62,8 +64,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   ),
                   backgroundColor: Colors.teal.shade700,
                   minimumSize: const Size.fromHeight(80)),
-              child: const Text(
-                'Başla',
+              child: Text(
+                LocaleKeys.bording_st1b.tr(),
                 style: TextStyle(
                   fontSize: 25,
                 ),

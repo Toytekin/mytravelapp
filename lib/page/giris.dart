@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seyehatapp/constant/router/router.dart';
 import 'package:seyehatapp/generated/locale_keys.g.dart';
+import 'package:seyehatapp/page/anasayafa/anasayfa.dart';
 import 'package:seyehatapp/services/cubit/theme_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -88,7 +89,8 @@ class _GirisEkraniState extends State<GirisEkrani> {
                       if (onboarding == false) {
                         context.go(AppRouterName.bordBar.path);
                       } else {
-                        context.go(AppRouterName.anasayfa.path);
+                        context.go(AppRouterName.splash.path,
+                            extra: AnaSayfa());
                       }
                     },
                     icon: Icon(

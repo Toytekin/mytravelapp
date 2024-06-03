@@ -187,6 +187,7 @@ class titleYazi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLength: 26,
       controller: title,
       decoration: InputDecoration(
         label: Text(LocaleKeys.not_baslik.tr()),
